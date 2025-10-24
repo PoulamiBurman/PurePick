@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { User, Mail, Phone, Lock, Eye, EyeOff } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { User, Mail, Phone, Lock, Eye, EyeOff, CheckCircle } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,6 +15,7 @@ const Register = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -24,8 +26,28 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Mock registration logic - will be implemented later
-    console.log('Registration attempt:', formData);
+    
+    // Basic validation
+    if (formData.password !== formData.confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
+    
+    // Mock registration logic - simulate successful signup
+    localStorage.setItem('userToken', 'mock-jwt-token');
+    localStorage.setItem('userEmail', formData.email);
+    localStorage.setItem('userName', formData.name);
+    
+    // Show success popup
+    setShowSuccessPopup(true);
+    
+    // Redirect to profile after 2 seconds
+    setTimeout(() => {
+      setShowSuccessPopup(false);
+      navigate('/profile');
+      // Trigger navbar refresh by dispatching a custom event
+      window.dispatchEvent(new Event('auth-change'));
+    }, 2000);
   };
 
   return (
@@ -189,6 +211,28 @@ const Register = () => {
           </Link>
         </p>
       </div>
+
+      {/* Success Popup */}
+      {showSuccessPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-8 max-w-sm w-full shadow-2xl transform animate-pulse">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <CheckCircle className="w-8 h-8 text-green-600" />
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-2">
+                You are signed up!
+              </h3>
+              <p className="text-gray-600 mb-4">
+                Welcome to PurePick! Setting up your dashboard...
+              </p>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="bg-green-600 h-2 rounded-full animate-pulse" style={{width: '100%'}}></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

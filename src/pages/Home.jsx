@@ -80,7 +80,15 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="gradient-bg py-20 lg:py-32">
+      <section 
+        className="gradient-bg py-20 lg:py-32"
+        style={{
+          backgroundImage: 'url(/my-background.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
@@ -247,10 +255,12 @@ const Home = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Button variant="secondary" size="lg">
-              View All Products
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
+            <Link to="/products">
+              <Button variant="secondary" size="lg">
+                View All Products
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

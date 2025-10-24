@@ -27,8 +27,8 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-rose-500 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">PP</span>
+            <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-rose-500 rounded-full flex items-center justify-center">
+              <span className="text-white font-bold text-sm"><img src="/logo.svg" alt="PurePick Logo" className="w-6 h-6 object-contain" /></span>
             </div>
             <span className="text-xl font-bold text-gray-900">PurePick</span>
           </Link>

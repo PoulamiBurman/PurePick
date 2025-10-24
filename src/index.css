@@ -28,5 +28,6 @@
   
   .gradient-bg {
     @apply bg-gradient-to-br from-primary-50 via-rose-50 to-primary-100;
+    /* Background image is now applied via inline styles in the component */
   }
 }
